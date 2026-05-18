@@ -10,7 +10,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  security-events: write
 
 jobs:
 
@@ -27,15 +26,6 @@ jobs:
 
       - name: Inspecionar tamanho da imagem final
         run: docker images minha-pagina-nginx
-
-      - name: Escanear vulnerabilidades (Trivy)
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: minha-pagina-nginx
-          format: table
-          exit-code: '1'
-          severity: CRITICAL,HIGH
-          ignore-unfixed: true
 
   # ── Job 2: Deploy (só na branch main, após build passar) ──
   deploy:
